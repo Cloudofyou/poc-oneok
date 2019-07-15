@@ -1,0 +1,46 @@
+# /etc/dhcp/dhcpd.hosts
+# Created by Topology-Converter v4.6.9
+#    Template Revision: v4.6.9
+#    https://github.com/cumulusnetworks/topology_converter
+#    using topology data from: site.dot
+
+group {
+
+  option domain-name-servers 192.168.200.254;
+  option domain-name "simulation";
+  #option routers 192.168.200.254;
+  option www-server 192.168.200.254;
+  option default-url = "http://192.168.200.254/onie-installer";
+
+
+host oob-mgmt-switch {hardware ethernet 44:38:39:00:00:2f; fixed-address 192.168.200.14; option host-name "oob-mgmt-switch"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host s2 {hardware ethernet 44:38:39:00:00:36; fixed-address 192.168.200.5; option host-name "s2"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host s1 {hardware ethernet 44:38:39:00:00:38; fixed-address 192.168.200.4; option host-name "s1"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host bl1 {hardware ethernet 44:38:39:00:00:3c; fixed-address 192.168.200.6; option host-name "bl1"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host bl2 {hardware ethernet 44:38:39:00:00:3e; fixed-address 192.168.200.7; option host-name "bl2"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host l4 {hardware ethernet 44:38:39:00:00:40; fixed-address 192.168.200.9; option host-name "l4"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host l3 {hardware ethernet 44:38:39:00:00:42; fixed-address 192.168.200.8; option host-name "l3"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host netq-ts {hardware ethernet 44:38:39:00:00:32; fixed-address 192.168.200.250; option host-name "netq-ts"; } 
+
+host storage02 {hardware ethernet 44:38:39:00:00:34; fixed-address 192.168.200.13; option host-name "storage02"; } 
+
+host storage01 {hardware ethernet 44:38:39:00:00:3a; fixed-address 192.168.200.12; option host-name "storage01"; } 
+
+host server01 {hardware ethernet 44:38:39:00:00:46; fixed-address 192.168.200.10; option host-name "server01"; } 
+
+host server02 {hardware ethernet 44:38:39:00:00:4c; fixed-address 192.168.200.11; option host-name "server02"; } 
+
+host internet {hardware ethernet 44:38:39:00:00:44; fixed-address 192.168.200.1; option host-name "internet"; option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";  } 
+
+host cisco9500-01 {hardware ethernet 44:38:39:00:00:48; fixed-address 192.168.200.2; option host-name "cisco9500-01"; } 
+
+host cisco9500-02 {hardware ethernet 44:38:39:00:00:4a; fixed-address 192.168.200.3; option host-name "cisco9500-02"; } 
+}#End of static host group
+

@@ -1,0 +1,42 @@
+graph site {
+ "internet" [function="internet" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.1"]
+ "cisco9500-01" [function="cisco" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.2"]
+ "cisco9500-02" [function="cisco" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.3"]
+ "s1" [function="spine" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.4"]
+ "s2" [function="spine" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.5"]
+ "bl1" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.6"]
+ "bl2" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.7"]
+ "l3" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.8"]
+ "l4" [function="leaf" os="CumulusCommunity/cumulus-vx" version="3.7.5" memory="1024" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="192.168.200.9"]
+ "server01" [function="host" os="yk0/ubuntu-xenial" memory="768" config="./helper_scripts/extra_server_config.sh" mgmt_ip="192.168.200.10"]
+ "server02" [function="host" os="yk0/ubuntu-xenial" memory="768" config="./helper_scripts/extra_server_config.sh" mgmt_ip="192.168.200.11"]
+ "storage01" [function="host" os="yk0/ubuntu-xenial" memory="768" config="./helper_scripts/extra_server_config.sh" mgmt_ip="192.168.200.12"]
+ "storage02" [function="host" os="yk0/ubuntu-xenial" memory="768" config="./helper_scripts/extra_server_config.sh" mgmt_ip="192.168.200.13"]
+ "netq-ts" [function="host" config="./helper_scripts/extra_server_config.sh" mgmt_ip="192.168.200.250" memory="2048" os="cumulus/ts"]
+
+
+"internet":"swp1" -- "cisco9500-01":"swp4"
+"internet":"swp2" -- "cisco9500-02":"swp4"
+"cisco9500-01":"swp1" -- "bl1":"swp25"
+"cisco9500-02":"swp1" -- "bl2":"swp55"
+"cisco9500-01":"swp3" -- "cisco9500-02":"swp3"
+
+"s1":"swp1" -- "bl1":"swp29"
+"s1":"swp2" -- "bl2":"swp53"
+"s1":"swp3" -- "l3":"swp53"
+"s1":"swp4" -- "l4":"swp53"
+"s2":"swp1" -- "bl1":"swp30"
+"s2":"swp2" -- "bl2":"swp54"
+"s2":"swp3" -- "l3":"swp54"
+"s2":"swp4" -- "l4":"swp54"
+"l3":"swp11" -- "server01":"eth1"
+"l3":"swp12" -- "server02":"eth1"
+"l4":"swp11" -- "server01":"eth2"
+"l4":"swp12" -- "server02":"eth2"
+"l3":"swp55" -- "l4":"swp55"
+"l3":"swp56" -- "l4":"swp56"
+"l3":"swp3" -- "storage01":"eth1"
+"l3":"swp5" -- "storage02":"eth1"
+"l4":"swp3" -- "storage01":"eth3"
+"l4":"swp5" -- "storage02":"eth3"
+}
